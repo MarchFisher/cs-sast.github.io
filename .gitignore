@@ -1,0 +1,11 @@
+.codex-memory.md
+
+# Local source material. These directories may contain private or unreviewed data.
+docs/archive/
+docs/private/
+
+# Generated output and local tooling.
+dist/
+node_modules/
+.DS_Store
+*.log

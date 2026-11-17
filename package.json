@@ -1,0 +1,14 @@
+{
+  "name": "seu-competition-department-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static-first website for the SEU Competition Department",
+  "scripts": {
+    "check": "node tools/check-content.js && node tools/check-profiles.js",
+    "build": "node tools/build-site.js",
+    "test": "npm run check && npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
