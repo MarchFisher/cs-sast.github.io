@@ -1,0 +1,74 @@
+/*
+ * 首页动态信息层：负责学年日历、公开通知、空状态和数据列表。\n * 日历与通知共用 data-list 结构，因此相关规则集中保存在这里。
+ */
+/* ===== 首页日历与通知 ===== */
+.info-section {
+  padding-top: 1rem;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.panel {
+  min-height: 27rem;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--surface);
+}
+.panel-dark {
+  color: white;
+  background: var(--blue);
+}
+.panel-dark .eyebrow,
+.work-section .eyebrow {
+  color: var(--yellow);
+}
+.panel h2 {
+  margin-bottom: 3rem;
+}
+.empty-state {
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 0;
+  border-block: 1px solid currentColor;
+}
+.empty-state strong {
+  font-size: 1.15rem;
+}
+.empty-state span {
+  color: var(--muted);
+}
+.panel-dark .empty-state span {
+  color: #b9cad6;
+}
+.data-list {
+  min-height: 9rem;
+  border-top: 1px solid currentColor;
+}
+.data-list > a,
+.data-list > div {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+.data-list time {
+  font: 700 0.78rem monospace;
+}
+.data-list span {
+  display: flex;
+  flex-direction: column;
+}
+.data-list small {
+  color: var(--muted);
+}
+.panel-dark .data-list small,
+.panel-dark .data-list time {
+  color: #b9cad6;
+}
+.panel .text-link {
+  display: inline-block;
+  margin-top: 2rem;
+}

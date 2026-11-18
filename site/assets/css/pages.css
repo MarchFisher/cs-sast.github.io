@@ -1,0 +1,65 @@
+/*
+ * 内页内容层：供赛事、历届、成员、加入我们和关于页面共同使用。\n * 这些页面共享相同的标题区、内容网格、卡片和标签组件。
+ */
+/* ===== 内页通用结构 ===== */
+.page-main {
+  min-height: 65vh;
+}
+.page-hero {
+  padding: 4.5rem 0 3.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero h1 {
+  max-width: 12em;
+  margin-bottom: 1rem;
+  font-size: clamp(2.7rem, 5vw, 5rem);
+}
+.page-hero p:not(.eyebrow) {
+  max-width: 43rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+.breadcrumb {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+.page-content {
+  padding: 4rem 0 6rem;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.content-card {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  scroll-margin-top: 1rem;
+}
+.content-card h2 {
+  margin-bottom: 0.55rem;
+  font-size: 1.45rem;
+}
+.content-card p {
+  margin-bottom: 0.8rem;
+  color: var(--muted);
+}
+.content-card p:last-child {
+  margin-bottom: 0;
+}
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  color: var(--blue);
+  background: var(--pale);
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}

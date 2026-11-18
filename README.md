@@ -21,4 +21,4 @@ python3 -m http.server 8000 -d dist
 - `docs/`：公开的协作、个人页面及上线配置文档。
 - `.github/`：Pull Request 模板和自动化工作流。
 
-提交内容前请阅读 [贡献指南](docs/Contributing.md) 和 [隐私检查清单](docs/PrivacyChecklist.md)。
+提交内容前请阅读 [贡献指南](docs/Contributing.md)、[公开赛事数据模型](docs/DataModel.md) 和 [隐私检查清单](docs/PrivacyChecklist.md)。

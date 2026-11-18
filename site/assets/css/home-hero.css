@@ -1,0 +1,141 @@
+/*
+ * 首页首屏层：负责主标题、操作按钮和当前赛事卡片。\n * 这里的规则只服务首屏，不应放入赛事列表或内页样式。
+ */
+/*
+ * 首页内容层：按页面从上到下的顺序组织首屏、赛事路径、动态面板、\n * 工作介绍和招新引导。该文件不包含其他内页专用规则。
+ */
+/* ===== 首页首屏与当前赛事 ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  background: var(--surface);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  right: -9rem;
+  top: -15rem;
+  border: 5rem solid var(--pale);
+  border-radius: 50%;
+  opacity: 0.65;
+}
+.hero-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+}
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--orange);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  max-width: 12ch;
+  margin-bottom: 1.4rem;
+  font-size: clamp(2.9rem, 5.5vw, 5.7rem);
+  line-height: 1.2;
+  /* letter-spacing: -0.055em; */
+}
+.hero-lead {
+  max-width: 41rem;
+  margin-bottom: 2rem;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+.text-highlight {
+  color: var(--blue)
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+.button {
+  display: inline-block;
+  padding: 0.82rem 1.2rem;
+  color: white;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 99px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.text-link {
+  font-weight: 700;
+  text-decoration: none;
+}
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+.current-event {
+  padding: 2rem;
+  color: white;
+  background: var(--blue);
+  border-radius: 1.2rem;
+  box-shadow: 1rem 1rem 0 var(--yellow);
+}
+.current-event h2 {
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+.current-event > p:not(.status-line) {
+  color: #dce7ef;
+}
+.status-line {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--yellow);
+  border-radius: 50%;
+}
+.current-event dl {
+  margin: 1.6rem 0;
+  border-block: 1px solid #ffffff33;
+}
+.current-event dl div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  padding: 0.7rem 0;
+}
+.current-event dl div + div {
+  border-top: 1px solid #ffffff33;
+}
+.current-event dt {
+  color: #b9cad6;
+  font-size: 0.8rem;
+}
+.current-event dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.card-link {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  text-decoration: none;
+}

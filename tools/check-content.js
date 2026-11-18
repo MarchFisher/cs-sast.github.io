@@ -39,9 +39,60 @@ for (const relativePath of textFiles) {
   const content = fs.readFileSync(absolutePath, 'utf8');
   for (const pattern of secretPatterns) if (pattern.test(content)) errors.push(`${relativePath}: possible secret detected`);
   if (extension === '.json') {
-    try { JSON.parse(content); } catch (error) { errors.push(`${relativePath}: invalid JSON (${error.message})`); }
+    try {
+      const data = JSON.parse(content);
+      if (relativePath === 'site/data/events.json') checkEventData(relativePath, data);
+    } catch (error) { errors.push(`${relativePath}: invalid JSON (${error.message})`); }
   }
-  if (extension === '.html') checkHtml(relativePath, content);
+  // components 中存放的是由 Web Component 注入的 HTML 片段，不是可独立
+  // 导航的完整文档，因此不要求 html/lang、viewport 或静态相对链接。
+  if (extension === '.html' && !relativePath.startsWith('site/components/')) {
+    checkHtml(relativePath, content);
+  }
+}
+
+function checkEventData(relativePath, data) {
+  const idPattern = /^[a-z0-9-]+$/;
+  const yearPattern = /^(\d{4})-(\d{4})$/;
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+  const ids = new Set();
+  const seriesIds = new Set();
+  const editionIds = new Set();
+  const requireFields = (item, fields, label) => {
+    for (const field of fields) if (!(field in (item || {}))) errors.push(`${relativePath}: ${label} is missing required field (${field})`);
+  };
+  const addId = (id, label) => {
+    if (!idPattern.test(id || '')) errors.push(`${relativePath}: ${label} has invalid id (${id})`);
+    if (ids.has(id)) errors.push(`${relativePath}: duplicate id (${id})`);
+    ids.add(id);
+  };
+  const checkDate = (value, label) => {
+    if (value === null) return;
+    if (!datePattern.test(value || '') || Number.isNaN(Date.parse(`${value}T00:00:00Z`))) errors.push(`${relativePath}: ${label} has invalid date (${value})`);
+  };
+  const checkUrl = (value, label) => {
+    if (value === null) return;
+    if (!/^(?:https:\/\/|[a-z0-9][a-z0-9./#_-]*)$/i.test(value || '')) errors.push(`${relativePath}: ${label} must be HTTPS or a local path (${value})`);
+  };
+  const year = yearPattern.exec(data.activeAcademicYear || '');
+  if (!year || Number(year[2]) !== Number(year[1]) + 1) errors.push(`${relativePath}: activeAcademicYear must span consecutive years`);
+  if (data.lastReviewed !== null) checkDate(data.lastReviewed, 'lastReviewed');
+  if (!Array.isArray(data.eventSeries) || data.eventSeries.length !== 4) errors.push(`${relativePath}: eventSeries must contain the four core series`);
+  for (const item of data.eventSeries || []) { requireFields(item, ['id', 'name', 'shortName', 'sequence', 'summary', 'audience', 'detailPath'], 'eventSeries'); addId(item.id, 'eventSeries'); seriesIds.add(item.id); checkUrl(item.detailPath, `${item.id}.detailPath`); }
+  for (const item of data.editions || []) {
+    requireFields(item, ['id', 'seriesId', 'academicYear', 'title', 'status', 'startDate', 'endDate', 'location', 'audience', 'rulesUrl', 'registrationUrl', 'archiveUrl', 'sources', 'lastReviewed'], 'edition');
+    addId(item.id, 'edition'); editionIds.add(item.id);
+    if (!seriesIds.has(item.seriesId)) errors.push(`${relativePath}: ${item.id} references unknown seriesId (${item.seriesId})`);
+    if (!['preview', 'registration', 'upcoming', 'finished'].includes(item.status)) errors.push(`${relativePath}: ${item.id} has invalid status`);
+    checkDate(item.startDate, `${item.id}.startDate`); checkDate(item.endDate, `${item.id}.endDate`); checkDate(item.lastReviewed, `${item.id}.lastReviewed`);
+    for (const key of ['rulesUrl', 'registrationUrl', 'archiveUrl']) checkUrl(item[key], `${item.id}.${key}`);
+    if (!Array.isArray(item.sources) || !item.sources.length) errors.push(`${relativePath}: ${item.id} requires at least one public source`);
+    for (const source of item.sources || []) checkUrl(source.url, `${item.id}.source.url`);
+  }
+  for (const item of data.calendar || []) { requireFields(item, ['id', 'editionId', 'date', 'label', 'location', 'url'], 'calendar item'); addId(item.id, 'calendar item'); if (!editionIds.has(item.editionId)) errors.push(`${relativePath}: ${item.id} references unknown editionId (${item.editionId})`); checkDate(item.date, `${item.id}.date`); checkUrl(item.url, `${item.id}.url`); }
+  for (const item of data.notices || []) { requireFields(item, ['id', 'date', 'title', 'url', 'source', 'lastReviewed'], 'notice'); addId(item.id, 'notice'); checkDate(item.date, `${item.id}.date`); checkDate(item.lastReviewed, `${item.id}.lastReviewed`); checkUrl(item.url, `${item.id}.url`); checkUrl(item.source?.url, `${item.id}.source.url`); }
+  if (!['open', 'closed', 'pending-confirmation'].includes(data.recruitment?.status)) errors.push(`${relativePath}: recruitment has invalid status`);
+  checkUrl(data.recruitment?.url ?? null, 'recruitment.url');
 }
 
 function checkHtml(relativePath, content) {
