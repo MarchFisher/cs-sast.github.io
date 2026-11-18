@@ -1,5 +1,16 @@
 {
-  "academicYears": [],
-  "events": [],
-  "lastReviewed": null
+  "$schema": "./events.schema.json",
+  "schemaVersion": 1,
+  "activeAcademicYear": "2026-2027",
+  "lastReviewed": null,
+  "eventSeries": [
+    { "id": "fanruan-cup", "name": "帆软杯程序设计新生赛", "shortName": "帆软杯", "sequence": "01", "summary": "面向新生的程序设计赛事。具体组别、赛制与参赛对象以当届章程为准。", "audience": "新生与程序设计入门者", "detailPath": "events/#fanruan-cup" },
+    { "id": "algorithm-ladder", "name": "算法天梯", "shortName": "算法天梯", "sequence": "02", "summary": "以持续学习和阶段性实践为主线的算法活动，具体安排以当届通知为准。", "audience": "希望持续练习算法的同学", "detailPath": "events/#algorithm-ladder" },
+    { "id": "short-code", "name": "短码竞赛", "shortName": "短码竞赛", "sequence": "03", "summary": "围绕程序表达与解题思路展开的特色竞赛，具体规则以当届章程为准。", "audience": "希望尝试特色编程挑战的同学", "detailPath": "events/#short-code" },
+    { "id": "seucpc", "name": "东南大学程序设计竞赛", "shortName": "SEUCPC", "sequence": "04", "summary": "校内程序设计竞赛。参赛资格、组队方式和赛制以当届章程为准。", "audience": "希望参与正式程序设计竞赛的同学", "detailPath": "events/#seucpc" }
+  ],
+  "editions": [],
+  "calendar": [],
+  "notices": [],
+  "recruitment": { "status": "pending-confirmation", "label": "招新信息待确认", "url": null }
 }

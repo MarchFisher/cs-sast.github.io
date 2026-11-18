@@ -1,0 +1,74 @@
+/*
+ * 首页参与引导层：负责赛事工作流程和招新横幅。\n * 两个区块都用于引导访问者参与，故放在同一文件并按页面顺序排列。
+ */
+/* ===== 赛事工作介绍 ===== */
+.work-section {
+  color: white;
+  background: #152b3b;
+}
+.work-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: center;
+}
+.work-layout > div > p:not(.eyebrow) {
+  margin: 1.5rem 0 2rem;
+  color: #bdc9d1;
+}
+.button-outline {
+  background: transparent;
+  border-color: #8295a2;
+}
+.work-flow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.work-flow li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #ffffff2e;
+}
+.work-flow span {
+  grid-row: span 2;
+  color: var(--yellow);
+  font: 700 0.8rem monospace;
+}
+.work-flow strong {
+  font-size: 1.12rem;
+}
+.work-flow small {
+  color: #9fb0bc;
+}
+/* ===== 招新引导 ===== */
+.join-banner {
+  padding: 5rem 0;
+  background: var(--yellow);
+}
+.join-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 3rem;
+  align-items: center;
+}
+.join-banner .eyebrow {
+  color: var(--blue);
+}
+.join-banner h2 {
+  max-width: 18ch;
+}
+.join-layout > div:last-child {
+  text-align: right;
+}
+.join-layout > div:last-child p {
+  margin-bottom: 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+.button-light {
+  color: var(--ink);
+  background: var(--surface);
+  border-color: var(--surface);
+}

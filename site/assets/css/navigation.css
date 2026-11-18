@@ -1,0 +1,71 @@
+/*
+ * 全站页头层：负责品牌标识、桌面导航和移动菜单的基础外观。\n * 移动端的显示切换仍放在 responsive.css，便于集中检查断点行为。
+ */
+/* ===== 全站页头与导航 ===== */
+/*
+ * 自定义元素默认是行内元素，因此需要显式设为块级。
+ * sticky 会在正常文档流中保留页头高度，并在滚动后固定于视口顶部；
+ * 相比 fixed，无需额外给 main 增加顶部内边距来防止内容被遮挡。
+ */
+site-header {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.site-header {
+  position: relative;
+  background: rgba(244, 241, 233, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  min-height: var(--desktop-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.76rem;
+  line-height: 1.15;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.brand strong {
+  font-size: 1.05rem;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  aspect-ratio: 1;
+  color: white;
+  background: var(--blue);
+  border-radius: 50%;
+  font-size: 0.67rem;
+  font-weight: 800;
+}
+.desktop-nav {
+  display: flex;
+  gap: 1.8rem;
+}
+.desktop-nav a {
+  position: relative;
+  padding: 0.5rem 0;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.desktop-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--orange);
+}
+.mobile-menu {
+  display: none;
+}

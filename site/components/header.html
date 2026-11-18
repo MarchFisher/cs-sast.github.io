@@ -1,0 +1,32 @@
+<!--
+  全站公共页头。
+
+  {{root}} 会由 shared-layout.js 替换成站点根地址。导航项上的
+  data-nav-page 用于匹配当前栏目，匹配后会转换为 aria-current="page"。
+  修改品牌、菜单项目或导航顺序时，只需要编辑本文件。
+-->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{root}}index.html" aria-label="赛事部官网首页">
+      <span class="brand-mark" aria-hidden="true">SEU</span>
+      <span><strong>计软智科协·赛事部</strong></span>
+    </a>
+    <details class="mobile-menu">
+      <summary>菜单</summary>
+      <nav aria-label="移动端主导航">
+        <a data-nav-page="home" href="{{root}}index.html">首页</a>
+        <a data-nav-page="events" href="{{root}}events/index.html">赛事</a>
+        <a data-nav-page="archive" href="{{root}}archive/index.html">历届</a>
+        <a data-nav-page="members" href="{{root}}members/index.html">成员</a>
+        <a data-nav-page="about" href="{{root}}about/index.html">关于</a>
+      </nav>
+    </details>
+    <nav class="desktop-nav" aria-label="主导航">
+      <a data-nav-page="home" href="{{root}}index.html">首页</a>
+      <a data-nav-page="events" href="{{root}}events/index.html">赛事</a>
+      <a data-nav-page="archive" href="{{root}}archive/index.html">历届</a>
+      <a data-nav-page="members" href="{{root}}members/index.html">成员</a>
+      <a data-nav-page="about" href="{{root}}about/index.html">关于</a>
+    </nav>
+  </div>
+</header>
